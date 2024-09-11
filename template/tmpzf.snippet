@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmpzf</Title>
+			<Shortcut>tmpzf</Shortcut>
+			<Description>Фрагмент кода Z-функции</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[vector<int> zf(string s) {
+	int n = s.size(), l = 0;
+	vector<int> z(n);
+	for (int i = 1; i < n; i++) {
+		if (i < l + z[l])
+			z[i] = min(z[i - l], l + z[l] - i);
+		while (z[i] + i < n && s[z[i]] == s[i + z[i]])
+			z[i]++;
+		if (i + z[i] > l + z[l])
+			l = i;
+	}
+	return z;
+}]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

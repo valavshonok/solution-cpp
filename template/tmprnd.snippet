@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmprnd</Title>
+			<Shortcut>tmprnd</Shortcut>
+			<Description>Фрагмент кода слуайное число от 0 до 2 ^ 63</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[long long rnd(long long st, long long end) {
+	long long a = rand();
+	long long b = rand();
+	long long c = rand();
+	long long d = rand();
+	if (rand() % 2)
+		a += (1 << 15) * b;
+	if (rand() % 2)
+		c += (1 << 15) * d;
+	if (rand() % 2)
+		a += (1 << 30) * c;
+	return a % (end - st + 1) + st;
+}]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

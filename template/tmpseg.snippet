@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmpseg</Title>
+			<Shortcut>tmpseg</Shortcut>
+			<Description>Фрагмент кода Дерево отрезков</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[struct segtree {
+	struct node {
+		long long sm, pr;
+	};
+	vector<node> a;
+	int m = 0;
+	segtree(int n) {
+		m = 2;
+		while (m <= n)
+			m *= 2;
+		a.resize(m * 2 - 1);
+	}
+	void prop(int lx, int rx, int i) {
+		if (rx - lx == 1)
+			return;
+		a[i * 2 + 1].pr += a[i].pr;
+		a[i * 2 + 2].pr += a[i].pr;
+		a[i * 2 + 1].sm += a[i].pr * (rx - lx) / 2;
+		a[i * 2 + 2].sm += a[i].pr * (rx - lx) / 2;
+		a[i] = { a[i * 2 + 1].sm + a[i * 2 + 2].sm, 0 };
+	}
+	void add(int i, long long v) {
+		add(i, i + 1, v);
+	}
+	void add(int l, int r, long long v) {
+		add(l, r, 0, m, 0, v);
+	}
+	void add(int l, int r, int lx, int rx, int i, long long v) {
+		prop(lx, rx, i);
+		if (lx >= r || rx <= l)
+			return;
+		if (lx >= l && rx <= r) {
+			a[i].pr += v;
+			a[i].sm += (rx - lx) * v;
+			return;
+		}
+		add(l, r, lx, (lx + rx) / 2, i * 2 + 1, v);
+		add(l, r, (lx + rx) / 2, rx, i * 2 + 2, v);
+	}
+	long long sm(int l, int r) {
+		return sm(l, r, 0, m, 0);
+	}
+	long long sm(int l, int r, int lx, int rx, int i) {
+		prop(lx, rx, i);
+		if (lx >= r || rx <= l)
+			return 0;
+		if (lx >= l && rx <= r)
+			return a[i].sm;
+		long long a = sm(l, r, lx, (lx + rx) / 2, i * 2 + 1);
+		long long b = sm(l, r, (lx + rx) / 2, rx, i * 2 + 2);
+		return a + b;
+	}
+};]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmpinter</Title>
+			<Shortcut>tmpinter</Shortcut>
+			<Description>Пересечение отрезков</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[long long invscal(vector<long long> x, vector<long long> y) {
+	return (x[1] - x[0]) * (y[3] - y[2]) - (x[3] - x[2]) * (y[1] - y[0]);
+};
+
+bool inter(vector<long long> x, vector<long long> y) {
+	if (min(max(x[0], x[1]) , max(x[3], x[2])) < max(min(x[1], x[0]), min(x[3], x[2])))
+		return false;
+	if (min(max(y[0], y[1]), max(y[3], y[2])) < max(min(y[1], y[0]), min(y[3], y[2])))
+		return false;
+	long long a = invscal({ x[0], x[1], x[0], x[2] }, { y[0], y[1], y[0], y[2] });
+	long long b = invscal({ x[0], x[1], x[0], x[3] }, { y[0], y[1], y[0], y[3] });
+	long long c = invscal({ x[2], x[3], x[2], x[1] }, { y[2], y[3], y[2], y[1] });
+	long long d = invscal({ x[2], x[3], x[2], x[0] }, { y[2], y[3], y[2], y[0] });
+	if ((a > 0 && b > 0) || (a < 0 && b < 0) || (c > 0 && d > 0) || (c < 0 && d < 0))
+		return false;
+	return true;
+};]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

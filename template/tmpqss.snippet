@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmpqss</Title>
+			<Shortcut>tmpqss</Shortcut>
+			<Description>Фрагмент кода Очередь на двух стэках</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[struct qss {
+	stack<long long> q, qx, qn;
+	long long mmx = -1e18, mmn = 1e18;
+	void push(long long a) {
+		qx.push(a);
+		qn.push(a);
+		mmx = max(mmx, a);
+		mmn = min(mmn, a);
+	}
+	void pr() {
+		if (!qx.empty() || q.empty())
+			return;
+		qx.push(q.top());
+		qn.push(q.top());
+		q.pop();
+		while (!q.empty()) {
+			qx.push(max(qx.top(), q.top()));
+			qn.push(min(qn.top(), q.top()));
+			q.pop();
+		}
+		mmn = 1e18;
+		mmx = -1e18;
+	}
+	void pop() {
+		pr();
+		if (qx.empty())
+			return;
+		qx.pop();
+		qn.pop();
+	}
+	long long mx() {
+		pr();
+		if (qx.empty())
+			return mmx;
+		return max(qx.top(), mmx);
+	}
+	long long mn() {
+		pr();
+		if (qn.empty())
+			return mmn;
+		return max(qn.top(), mmn);
+	}
+};]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

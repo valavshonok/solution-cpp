@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmpbor</Title>
+			<Shortcut>tmpbor</Shortcut>
+			<Description>Фрагмент кода Бор</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[struct bor {
+	struct node {
+		int v = 0;
+		map<int, int> mp;
+		node(int vv = 0) {
+			v = vv;
+		}
+	};
+	vector<node> a;
+	bor() {
+		a.resize(1);
+	}
+	void add(string& s) {
+		if (a[0].mp.count(s[0]) == 0) {
+			a[0].mp[s[0]] = a.size();
+			a.push_back(node(0));
+		}
+		add(s, 0, a[0].mp[s[0]]);
+	}
+	void add(string& s, int i, int j) {
+		if (i == s.size() - 1) {
+			a[j].v = 1;
+			return;
+		}
+		if (a[j].mp.count(s[i]) == 0) {
+			a[j].mp[s[i]] = a.size();
+			a.push_back(node(0));
+		}
+		add(s, i + 1, a[j].mp[s[i]]);
+	}
+};
+]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

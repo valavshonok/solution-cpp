@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmpmain</Title>
+			<Shortcut>tmpmain</Shortcut>
+			<Description>Пустой файл</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[#include <bits/stdc++.h>
+
+using namespace std;
+
+void F() {
+
+}	
+
+int main() {
+#ifdef KRAKOZAYBRA
+	FILE* stream;
+	freopen_s(&stream, "input.txt", "r", stdin);
+	//freopen_s(&stream, "output.txt", "w", stdout);
+#endif
+	cin.tie(0)->sync_with_stdio(0);
+	int _t = 1;
+	cin >> _t;
+	while (_t--)
+		F();
+}]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

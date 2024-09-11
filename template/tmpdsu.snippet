@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmpdsu</Title>
+			<Shortcut>tmpdsu</Shortcut>
+			<Description>Фрагмент кода dsu</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[struct dsu {
+	vector<int> a;
+	dsu(int n) {
+		a.resize(n);
+		iota(a.begin(), a.end(), 0);
+	}
+	void join(int u, int v) {
+		a[get(u)] = get(v);
+	}
+	int get(int u) {
+		return a[u] == u ? u : a[u] = get(a[u]);
+	}
+};]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
