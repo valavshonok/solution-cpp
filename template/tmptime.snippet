@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>tmptime</Title>
+			<Shortcut>tmptime</Shortcut>
+			<Description>Класс для подсчета врепени выполнения фрагмента кода</Description>
+			<Author>Microsoft Corporation</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="cpp">
+	<![CDATA[#include <chrono>
+
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::duration;
+using std::chrono::milliseconds;
+
+class Time {
+public:
+	static std::chrono::steady_clock::time_point t1, t2;
+	static int t;
+	static void start() {
+		t1 = high_resolution_clock::now();
+	};
+	static void end() {
+		t2 = high_resolution_clock::now();
+		getTime();
+	};
+	static void restart() {
+		t2 = high_resolution_clock::now();
+		getTime();
+		t1 = high_resolution_clock::now();
+	};
+#ifndef ONLINE_JUDGE
+	static void getTime() {
+		duration<double, std::milli> ms_double = t2 - t1;
+		std::cout << ms_double.count() << "ms\n";
+	};
+#else
+	static void getTime() {};
+#endif
+};
+std::chrono::steady_clock::time_point Time::t1 = high_resolution_clock::now();
+std::chrono::steady_clock::time_point Time::t2 = high_resolution_clock::now();]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
